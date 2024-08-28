@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const page = () => {
+const Page = () => {
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [username, setUsername] = useState('')
 
@@ -214,4 +214,4 @@ const router = useRouter();
   )
 }
 
-export default page
+export default Page

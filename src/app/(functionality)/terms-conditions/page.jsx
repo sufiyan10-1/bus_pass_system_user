@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TermsAndConditions = () => {
+const page = () => {
   return (
-     <p>comming soon..</p>
+     <h1>comming soon..</h1>
   );
 };
 
-export default TermsAndConditions;
+export default page;
