@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import Link from 'next/link';
 const Page = () => {
   const [status, setStatus] = useState('Loading...');
   const [username, setUsername] = useState('');
