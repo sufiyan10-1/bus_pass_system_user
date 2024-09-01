@@ -1,12 +1,14 @@
 'use client'
 import { toast } from '@/components/ui/use-toast';
 import axios from 'axios';
+import Link from 'next/link';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 const Page = () => {
   const [identityData, setIdentityData] = useState([]);
   const [username, setUsername] = useState('');
+  const [isIdentityAvailable, setIsIdentityAvailable] = useState('');
 
   // Fetching the current user if available
   const getUserDetail = async () => {
@@ -33,17 +35,25 @@ const Page = () => {
          if(!response){
            console.log("identity not found")
          }
-         setIdentityData(response.data.data) 
+         else{
+         setIdentityData(response.data.data)
+         setIsIdentityAvailable(response.data.data.status)
+        } 
       }catch(error){
-        console.log(error)
+        console.log(error);
+        setIsIdentityAvailable("Not Found")
       }   
       }
     fetchData();
   }, [username]);
- console.log(identityData)
+
+ console.log(isIdentityAvailable)
   return (
+
     <div className="flex items-center justify-center min-h-screen bg-slate-200">
-      <div className="max-w-sm w-full h-auto bg-[#1a2338] rounded-xl shadow-xl text-white overflow-hidden text-center">
+     {
+      isIdentityAvailable === "Accepted"?(
+        <div className="max-w-sm w-full h-auto bg-[#1a2338] rounded-xl shadow-xl text-white overflow-hidden text-center">
         <div className="bg-gradient-to-br from-[#0033cc] to-[#3366ff] p-4 flex flex-row items-center object-contain">
           
             <Image
@@ -94,7 +104,34 @@ const Page = () => {
         </div>
 
       </div>
+      ):(
+        isIdentityAvailable === "Not Found"?(
+          <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+          <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center mb-6">
+              Application Status
+            </h1>
+            <div className="text-center text-sm md:text-base">
+                 There is no Identity Found. Please send Application For Identity  
+            </div>
+          </div>
+        </div>
+        ):(
+          <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+          <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center mb-6">
+              Application Status
+            </h1>
+            <div className="text-center text-sm md:text-base">
+               Identity Not Avalible Check Your Application Status <Link href='/application-status' className='text-blue-800 hover:underline'>Click here</Link>
+            </div>
+          </div>
+        </div>
+        )
+      )
+     }
     </div>
+ 
   );
 };
 

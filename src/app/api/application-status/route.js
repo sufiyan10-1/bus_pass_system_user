@@ -14,9 +14,9 @@ export async function POST(request) {
    
    if(!identity){
      return NextResponse.json({
-       success: false,
+       success: true,
        message: "No Application Found"
-     },{status: 400})
+     },{status: 200})
    }
    else{
     return NextResponse.json({

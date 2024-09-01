@@ -36,10 +36,10 @@ const Page = () => {
     const fetchStatus = async () => {
       try {
         const response = await axios.post('/api/application-status', { username });
-        console.log(response.data);
+        console.log(response);
         setStatus(response.data.message);
 
-        if (!response.data.success) {
+        if (!response.data) {
           toast({
             title: "Failed!",
             description: response.data.message,
@@ -47,7 +47,6 @@ const Page = () => {
           });
         } else {
           toast({
-            title: "Success!",
             description: response.data.message,
           });
         }
@@ -66,15 +65,15 @@ const Page = () => {
   }, [username]); // Depend on userId
 
   const renderStatusMessage = () => {
-    switch (status.toLowerCase()) {
-      case 'Pending':
-        return<div> <p className="text-yellow-500">Your application is currently pending. Please check back later.</p><Link href='/view-identity'><Button>View Identity</Button></Link></div>;
-      case 'Accepted':
-        return <p className="text-green-500">Congratulations! Your application has been approved.</p>;
-      case 'loading...':
-        return <p className="text-gray-500">Loading your application status...</p>;
-      default:
-        return <p className="text-red-500">{status}</p>;
+    if(status === 'Pending'){
+      return <p className="text-orange-500">Your application is currently pending. It will approved within 24 hours</p>;
+    }
+      else if (status === 'Accepted') {
+      return <p className="text-green-500">Congratulations! Your application has been approved.</p>;
+    } else if (status === 'Loading...') {
+      return <p className="text-gray-500">Loading your application status...</p>;
+    } else {
+      return <p className="text-red-500">{status}</p>;
     }
   };
 

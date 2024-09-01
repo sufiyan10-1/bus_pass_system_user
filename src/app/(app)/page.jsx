@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
  
 
 const features = [
@@ -97,11 +99,54 @@ const HomePage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-800 text-white py-4">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 MSRTC. All rights reserved.</p>
-        </div>
-      </footer>
+      <footer className="bg-gray-800 text-white p-5 text-center text-sm">
+            <div className="flex flex-col sm:flex-row justify-around flex-wrap mb-4">
+                <div className="m-2">
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Home</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">About Us</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Contact Us</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">FAQs</a>
+                </div>
+                <div className="m-2">
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Application</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Tracking System</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Document Upload</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Validity</a>
+                </div>
+                <div className="m-2">
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Terms of Service</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Privacy Policy</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">User Guide</a>
+                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Support</a>
+                </div>
+            </div>
+
+            <div className="mt-4">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+                    <i className="fab fa-youtube"></i>
+                </a>
+            </div>
+
+            <div className="border-t border-white pt-2 text-xs mt-4">
+                © 2024 Government Bus E-Pass Generation. All rights reserved.
+            </div>
+        </footer>
+
     </div>
   );
 };
