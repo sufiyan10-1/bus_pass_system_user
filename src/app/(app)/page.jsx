@@ -9,8 +9,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
- 
-
 const features = [
   { title: "Innovative Technology", description: "Utilizing the latest technology to enhance your travel experience with real-time updates and easy booking.", icon: "/icons/technology.png" },
   { title: "24/7 Customer Support", description: "Our dedicated team is available around the clock to assist you with any queries or concerns.", icon: "/icons/support.png" },
@@ -19,33 +17,29 @@ const features = [
 ];
 
 const HomePage = () => {
-  
   const router = useRouter();
- 
-  const[isUserPresent, setIsUserPresent] = useState(false)
-  //get current user
+  const [isUserPresent, setIsUserPresent] = useState(false);
+
   useEffect(() => {
     const getUserDetail = async () => {
       try {
         const res = await axios.get('api/me');
         console.log(res.data);
-  
+
         if (res.data.message === 'User found') {
           setIsUserPresent(true);
         }
-        console.log(isUserPresent);
       } catch (error) {
         console.log("error in page", error);
       }
     };
-  
+
     getUserDetail();
-  }, []); // Empty dependency array means this will run once when the component mounts
-  
+  }, []); // No dependency array or empty array
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-        //from components
       {/* Main Content */}
       <main className="pt-16 container mx-auto py-8 px-4">
         {/* Hero Section */}
@@ -82,18 +76,15 @@ const HomePage = () => {
               <Image src={imgSrc} alt={title} width={100} height={100} className="mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-slate-800 mb-2">{title}</h3>
               <p className="text-slate-600 mb-4">{description}</p>
-             
-                <Button
-                 onClick={(e)=>{
+              <Button
+                onClick={(e) => {
                   e.preventDefault();
-                  isUserPresent?router.push(href):router.push('sign-in')
-             
-                 
-                }} 
-                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700">
-                  {buttonText}
-                </Button>
-              
+                  isUserPresent ? router.push(href) : router.push('sign-in');
+                }}
+                className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
+              >
+                {buttonText}
+              </Button>
             </div>
           ))}
         </section>
@@ -129,53 +120,52 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white p-5 text-center text-sm">
-            <div className="flex flex-col sm:flex-row justify-around flex-wrap mb-4">
-                <div className="m-2">
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Home</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">About Us</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Contact Us</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">FAQs</a>
-                </div>
-                <div className="m-2">
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Application</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Tracking System</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Document Upload</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Validity</a>
-                </div>
-                <div className="m-2">
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Terms of Service</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Privacy Policy</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">User Guide</a>
-                    <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Support</a>
-                </div>
-            </div>
+        <div className="flex flex-col sm:flex-row justify-around flex-wrap mb-4">
+          <div className="m-2">
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Home</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">About Us</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Contact Us</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">FAQs</a>
+          </div>
+          <div className="m-2">
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Application</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Tracking System</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Document Upload</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">E-Pass Validity</a>
+          </div>
+          <div className="m-2">
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Terms of Service</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Privacy Policy</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">User Guide</a>
+            <a href="#" className="text-white no-underline block my-1 px-1 py-1 transition-colors duration-300 hover:text-blue-400">Support</a>
+          </div>
+        </div>
 
-            <div className="mt-4">
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-instagram"></i>
-                </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-github"></i>
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-twitter"></i>
-                </a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
-                    <i className="fab fa-youtube"></i>
-                </a>
-            </div>
+        <div className="mt-4">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-instagram"></i>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-github"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2 text-lg no-underline transition-colors duration-300 hover:text-blue-400 p-1 rounded-full">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </div>
 
-            <div className="border-t border-white pt-2 text-xs mt-4">
-                © 2024 Government Bus E-Pass Generation. All rights reserved.
-            </div>
-        </footer>
-
+        <div className="border-t border-white pt-2 text-xs mt-4">
+          © 2024 Government Bus E-Pass Generation. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 };
