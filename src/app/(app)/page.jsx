@@ -23,25 +23,25 @@ const HomePage = () => {
   const router = useRouter();
  
   const[isUserPresent, setIsUserPresent] = useState(false)
+  //get current user
+  useEffect(() => {
+    const getUserDetail = async () => {
+      try {
+        const res = await axios.get('api/me');
+        console.log(res.data);
   
-//geting current user if avalilabel
-  const getUserDetail = async ()=>{
-   try {
-     const res = await axios.get('api/me')
-     console.log(res.data)
-    
-    if(res.data.message === 'User found'){
-      setIsUserPresent(true)
-    }
-   console.log(isUserPresent)
-   } catch (error) {
-     console.log("error in page",error)
-   }
-   }
-  useEffect(()=>{
+        if (res.data.message === 'User found') {
+          setIsUserPresent(true);
+        }
+        console.log(isUserPresent);
+      } catch (error) {
+        console.log("error in page", error);
+      }
+    };
+  
     getUserDetail();
-  }, [])
-
+  }, []); // Empty dependency array means this will run once when the component mounts
+  
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
