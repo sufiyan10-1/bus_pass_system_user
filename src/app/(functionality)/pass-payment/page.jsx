@@ -116,21 +116,24 @@ const PaymentPage = () => {
             const result = await axios.post('/api/verify-payment', data, {
               headers: { 'Content-Type': 'application/json' },
             });
-
+           
             if (result.data.isOk) {
               alert('Payment succeeded');
-              console.log(result.data);
-            //  const response = await axios.post('api/store-data-of-payment',result.data);
-              if(response){
+            
+              const response = await axios.post('api/store-data-of-payment', {username, paymentId: orderId});
+              console.log(response)
+              if(response.data){
                 toast({
                   title: "Success",
                   description: "Pass genrated Successfull view your Pass",
                 })
               }
+              else{
               toast({
                 title: "Faild",
                 description: "Pass genration Faild due abnormal Problem",
               })
+            }
             } else {
               alert(result.data.message);
             }

@@ -1,4 +1,5 @@
 import mongoose,{Schema} from "mongoose";
+import { Stick } from "next/font/google";
  
 const passSchema = new mongoose.Schema({
    paymentId:{
@@ -10,11 +11,11 @@ const passSchema = new mongoose.Schema({
     default: false,
    },
     startDate:{
-    type: Date,
+    type: String,
     required: true,
    },
    endDate:{
-    type: Date,
+    type: String,
     required: true,
    },
  });

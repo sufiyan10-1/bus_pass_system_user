@@ -16,7 +16,7 @@ const NavBar = () => {
   const getUserDetail = async ()=>{
    try {
      const res = await axios.get('api/me')
-     console.log(res.data)
+    
      setUserData(res.data.data)
     if(res.data.message === 'User found'){
       setIsUserPresent(true)
@@ -28,7 +28,6 @@ const NavBar = () => {
    }
   useEffect(()=>{
     getUserDetail();
-
   }, [])
 
 // logout functionality 

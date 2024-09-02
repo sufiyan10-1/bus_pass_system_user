@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
  
 
@@ -17,13 +19,33 @@ const features = [
 ];
 
 const HomePage = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  
+  const router = useRouter();
+ 
+  const[isUserPresent, setIsUserPresent] = useState(false)
+  
+//geting current user if avalilabel
+  const getUserDetail = async ()=>{
+   try {
+     const res = await axios.get('api/me')
+     console.log(res.data)
+    
+    if(res.data.message === 'User found'){
+      setIsUserPresent(true)
+    }
+   console.log(isUserPresent)
+   } catch (error) {
+     console.log("error in page",error)
+   }
+   }
+  useEffect(()=>{
+    getUserDetail();
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      
+        //from components
       {/* Main Content */}
       <main className="pt-16 container mx-auto py-8 px-4">
         {/* Hero Section */}
@@ -60,11 +82,18 @@ const HomePage = () => {
               <Image src={imgSrc} alt={title} width={100} height={100} className="mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-slate-800 mb-2">{title}</h3>
               <p className="text-slate-600 mb-4">{description}</p>
-              <Link href={href}>
-                <Button className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700">
+             
+                <Button
+                 onClick={(e)=>{
+                  e.preventDefault();
+                  isUserPresent?router.push(href):router.push('sign-in')
+             
+                 
+                }} 
+                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700">
                   {buttonText}
                 </Button>
-              </Link>
+              
             </div>
           ))}
         </section>
