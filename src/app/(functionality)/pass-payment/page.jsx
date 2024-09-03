@@ -127,6 +127,7 @@ const PaymentPage = () => {
                   title: "Success",
                   description: "Pass genrated Successfull view your Pass",
                 })
+                route.push('/view-pass')
               }
               else{
               toast({
