@@ -46,7 +46,7 @@ const Page = () => {
     fetchData();
   }, [username]);
 
-  useEffect(() => {
+   useEffect(() => {
     const dateMaker = () => {
       const datesContainers = document.querySelectorAll('.dates');
       datesContainers.forEach(dates => {
