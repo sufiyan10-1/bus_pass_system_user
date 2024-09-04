@@ -33,9 +33,7 @@ const router = useRouter();
       const res = await axios.get('api/me')
       console.log(res.data)
       setUsername(res.data.data.username)
-     if(res.mesaaage == "User found"){
-       
-     }
+      
     
     } catch (error) {
       console.log("error in page",error)

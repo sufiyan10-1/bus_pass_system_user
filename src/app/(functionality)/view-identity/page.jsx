@@ -9,7 +9,7 @@ const Page = () => {
   const [identityData, setIdentityData] = useState([]);
   const [username, setUsername] = useState('');
   const [isIdentityAvailable, setIsIdentityAvailable] = useState('');
-
+console.log(identityData)
   // Fetching the current user if available
   const getUserDetail = async () => {
     try {
@@ -69,7 +69,7 @@ const Page = () => {
           </h2>
         </div>
         <div className="my-4 mx-auto w-[120px] h-[120px] rounded-full overflow-hidden">
-        <Image height={50} width={30} src={identityData.studentPhoto} alt="Student Photo"/>
+        <Image height={40} width={120} src={identityData.studentPhoto} alt="Student Photo"/>
         </div>
         <h1 className="mt-2 text-base md:text-xl font-bold uppercase">{identityData.IdNumber}</h1>
         
@@ -97,7 +97,7 @@ const Page = () => {
           <h3 className='font-bold text-lg'>Controler Signature</h3>
         </div>
         <div>
-          <Image height={20} width={20} src={identityData.studentPhoto} alt="Student Photo" className='bg-white h-14 w-40'/>
+          <Image height={20} width={20} src={identityData.studentSign} alt="Student Photo" className='bg-white h-14 w-40'/>
           <h3 className='font-bold text-lg'>Student Signature</h3>
         </div>
         
