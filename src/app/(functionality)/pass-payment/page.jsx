@@ -4,13 +4,14 @@ import Script from 'next/script';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 const PaymentPage = () => {
   const [loading, setLoading] = useState(false);
   const [identityData, setIdentityData] = useState({});
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [username, setUsername] = useState('');
-  
+  const router = useRouter();
 
 
   // Fetch current user details
@@ -127,7 +128,7 @@ const PaymentPage = () => {
                   title: "Success",
                   description: "Pass genrated Successfull view your Pass",
                 })
-                route.push('/view-pass')
+                router.push('/view-pass')
               }
               else{
               toast({
