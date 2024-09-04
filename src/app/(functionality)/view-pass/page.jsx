@@ -46,6 +46,32 @@ const Page = () => {
     fetchData();
   }, [username]);
 
+  useEffect(() => {
+    const dateMaker = () => {
+      const datesContainers = document.querySelectorAll('.dates');
+      datesContainers.forEach(dates => {
+        const heightForDate = dates.getBoundingClientRect().height / 12;
+        for (let i = 1; i <= 33; i++) {
+          const elm = document.createElement('span');
+          elm.innerHTML = `${i}`;
+          elm.classList.add('date');
+          elm.style.height = `${heightForDate}px`;
+          elm.style.width = `${heightForDate}px`;
+
+          if (i <= 10) {
+            elm.classList.add('date-fill');
+          }
+
+          if (i <= 31) {
+            dates.appendChild(elm);
+          }
+        }
+      });
+    };
+
+    dateMaker();
+  }, []);
+
 
    return (
     <div className="flex items-center justify-center min-h-screen bg-gray-500">

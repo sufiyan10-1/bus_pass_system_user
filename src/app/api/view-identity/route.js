@@ -34,7 +34,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Error while fetching data",
+        message: "Error while fetching data "+error,
       },
       { status: 500 }
     );
