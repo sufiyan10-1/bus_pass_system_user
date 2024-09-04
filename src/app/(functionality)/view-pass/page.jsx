@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
  
- function page() {
+const Page = () => {
     const [isFront, setIsFront] = useState(true);
     const [identityData, setIdentityData] = useState([]);
   const [username, setUsername] = useState('');
@@ -159,5 +159,5 @@ import React, { useEffect, useState } from 'react'
    )
  }
  
- export default page
+ export default Page
  
