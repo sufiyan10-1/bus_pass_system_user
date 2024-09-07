@@ -5,6 +5,7 @@ import { toast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
 const Page = () => {
   const [status, setStatus] = useState('Loading...');
   const [username, setUsername] = useState('');
@@ -71,7 +72,7 @@ const Page = () => {
       else if (status === 'Accepted') {
       return <p className="text-green-500">Congratulations! Your application has been approved.</p>;
     } else if (status === 'Loading...') {
-      return <p className="text-gray-500">Loading your application status...</p>;
+      return  <div className='flex justify-center'><Loader2 className='animate-spin'/></div> 
     } else {
       return <p className="text-red-500">{status}</p>;
     }

@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request){
     await dbConnect()
- const {username, paymentId} = await request.json();
+ const {username, paymentId,amount} = await request.json();
   try {
     const user = await IdentityModel.findOne({username});
     if(!user){
@@ -35,7 +35,8 @@ export async function POST(request){
      const endDate = endDateFunction()
      console.log(endDate)
     //add new pass
-    const newPass = {paymentId, paymentSuccessfull:true, startDate, endDate}
+    const newPass = {paymentId, paymentSuccessfull:true, startDate, endDate, passFees: amount}
+   
     user.monthlyPass.push(newPass)
     const savePass = await user.save()
     if(savePass){

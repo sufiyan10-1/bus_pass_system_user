@@ -18,6 +18,10 @@ const passSchema = new mongoose.Schema({
     type: String,
     required: true,
    },
+   passFees:{
+    type: Number,
+    required: true
+   }
  });
   
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { Loader, Loader2 } from 'lucide-react';
 
 const Page = () => {
   const [identityData, setIdentityData] = useState([]);
@@ -46,13 +47,15 @@ console.log(identityData)
       }
     fetchData();
   }, [username]);
-
- console.log(isIdentityAvailable)
-  return (
-
-    <div className="flex items-center justify-center min-h-screen bg-slate-200">
-     {
-      isIdentityAvailable === "Accepted"?(
+  
+  const identityShowing = ()=>{
+    if(isIdentityAvailable === ""){
+      return(
+        <Loader2 className='animate-spin w-24 h-24'/>
+      )
+    }
+    else if(isIdentityAvailable === "Accepted"){
+     return(
         <div className="max-w-sm w-full h-auto bg-[#1a2338] rounded-xl shadow-xl text-white overflow-hidden text-center">
         <div className="bg-gradient-to-br from-[#0033cc] to-[#3366ff] p-4 flex flex-row items-center object-contain">
           
@@ -104,32 +107,28 @@ console.log(identityData)
         </div>
 
       </div>
-      ):(
-        isIdentityAvailable === "Not Found"?(
-          <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-          <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center mb-6">
-              Application Status
-            </h1>
-            <div className="text-center text-sm md:text-base">
-                 There is no Identity Found. Please send Application For Identity  
-            </div>
-          </div>
-        </div>
-        ):(
-          <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-          <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center mb-6">
-              Application Status
-            </h1>
-            <div className="text-center text-sm md:text-base">
-               Identity Not Avalible Check Your Application Status <Link href='/application-status' className='text-blue-800 hover:underline'>Click here</Link>
-            </div>
-          </div>
-        </div>
-        )
       )
-     }
+    }
+    else{
+        return(      
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+          <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center mb-6">
+            Application Status
+          </h1>
+          <div className="text-center text-sm md:text-base">
+             Identity Not Avalible Check Your Application Status <Link href='/application-status' className='text-blue-800 hover:underline'>Click here</Link>
+          </div>
+        </div>
+      </div>
+     )
+    }
+  }
+  
+  
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-slate-200">
+     {identityShowing()}
     </div>
  
   );

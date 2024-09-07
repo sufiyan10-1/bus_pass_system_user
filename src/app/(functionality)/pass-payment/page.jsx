@@ -121,14 +121,14 @@ const PaymentPage = () => {
             if (result.data.isOk) {
               alert('Payment succeeded');
             
-              const response = await axios.post('api/store-data-of-payment', {username, paymentId: orderId});
+              const response = await axios.post('api/store-data-of-payment', {username, paymentId: orderId, amount});
               console.log(response)
               if(response.data){
                 toast({
                   title: "Success",
                   description: "Pass genrated Successfull view your Pass",
                 })
-                router.push('/view-pass')
+                router.push('/view-all-passes')
               }
               else{
               toast({
