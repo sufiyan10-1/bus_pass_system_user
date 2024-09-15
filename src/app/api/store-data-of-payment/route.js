@@ -28,14 +28,23 @@ export async function POST(request){
     };
     const endDateFunction = () => {
       const date = new Date();
-      date.setDate(date.getDate() + 30);
+      date.setDate(date.getDate() + 29);
       return formatDate(date);
     };
      const startDate =  formatDate(new Date());
      const endDate = endDateFunction()
-     console.log(endDate)
+     console.log(amount)
     //add new pass
-    const newPass = {paymentId, paymentSuccessfull:true, startDate, endDate, passFees: amount}
+    const newPass = {
+      paymentId, 
+      paymentSuccessfull:true, 
+      startDate, 
+      endDate, 
+      passFees: amount,
+      selectionGoing: [0],
+      selectionComming: [0]
+    }
+    console.log(newPass)
    
     user.monthlyPass.push(newPass)
     const savePass = await user.save()

@@ -45,7 +45,7 @@ const PaymentPage = () => {
   }, [username]);
  
   let amount = 0;
-  if (identityData.distanceFrom === "Ardhpur" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Ardhapur") {
+  if (identityData.distanceFrom === "Ardhapur" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Ardhapur") {
     amount = 580;
   }
   if (identityData.distanceFrom === "Kandhar" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Kandhar") {

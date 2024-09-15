@@ -19,7 +19,9 @@ const features = [
 const HomePage = () => {
   const router = useRouter();
   const [isUserPresent, setIsUserPresent] = useState(false);
+  const [isIdentityAvalible, setIsIdentityAvalible] = useState(false)
 
+  //getting current user
   useEffect(() => {
     const getUserDetail = async () => {
       try {
@@ -35,7 +37,9 @@ const HomePage = () => {
     };
 
     getUserDetail();
-  }, []); // No dependency array or empty array
+  }, []); 
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -64,29 +68,37 @@ const HomePage = () => {
         </section>
 
         {/* Services Section */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 bg-slate-100 py-8 rounded-lg">
-          {/* Service Cards */}
-          {[
-            { href: "/studend-detial-for-identity", imgSrc: "/identity-backgroud.png", title: "Create Identity", description: "Easily create your travel identity for personalized services.", buttonText: "Get Started" },
-            { href: "/detials-for-pass", imgSrc: "/bus-pass-backgroud.jpg", title: "Bus Pass", description: "Apply for your bus pass quickly and conveniently online.", buttonText: "Apply Now" },
-            { href: "/live-tracking", imgSrc: "/live-tracking-backgroud.jpg", title: "Live Tracking", description: "Track your bus in real-time to know exactly when it will arrive.", buttonText: "Track Now" },
-            { href: "/bus-timing", imgSrc: "/timing-background.jpg", title: "Bus Timing", description: "Check the bus schedules and plan your journey accordingly.", buttonText: "View Timings" }
-          ].map(({ href, imgSrc, title, description, buttonText }, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
-              <Image src={imgSrc} alt={title} width={100} height={100} className="mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-slate-800 mb-2">{title}</h3>
-              <p className="text-slate-600 mb-4">{description}</p>
+        <section className="flex justify-around  w-full gap-8 mt-12 bg-slate-100 py-8 rounded-lg">
+           
+          <div   className="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+              <Image src="/identity-backgroud.png" alt="studend-detial-for-identity" width={100} height={100} className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">Create Identity</h3>
+              <p className="text-slate-600 mb-4">Easily create your travel identity for personalized services.</p>
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  isUserPresent ? router.push(href) : router.push('sign-in');
+                  isUserPresent ?  router.push('/studend-detial-for-identity') : router.push('sign-in');
                 }}
                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
               >
-                {buttonText}
+                Get Started
               </Button>
             </div>
-          ))}
+
+            <div   className="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+              <Image src="/bus-pass-backgroud.jpg" alt="Bus Pass" width={100} height={100} className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">Bus Pass</h3>
+              <p className="text-slate-600 mb-4">Apply for your bus pass quickly and conveniently online.</p>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  isUserPresent && isIdentityAvalible ?  router.push('/pass-payment') : router.push('sign-in');
+                }}
+                className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
+              >
+                Apply Now
+              </Button>
+            </div>
         </section>
 
         {/* Unique Features Section */}

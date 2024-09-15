@@ -5,20 +5,21 @@ import './main.css';  // Add your CSS in a separate file
 import { MoveLeft, MoveRight } from 'lucide-react';
 import axios from 'axios';
 import Image from 'next/image';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const BusPass = () => {
   const [identityData, setIdentityData] = useState([]);
   const [username, setUsername] = useState('');
   const [isIdentityAvailable, setIsIdentityAvailable] = useState('');
+  const [qrValue, setQrValue] = useState(0);
 
 //id from url
   const urlParams = new URLSearchParams(window.location.pathname.split('/').pop());
   let idFromUrl = urlParams.toString();
   idFromUrl = idFromUrl.substring(0, idFromUrl.length - 1); // Adjust if there's an extra character
-console.log(idFromUrl)
 
   //getting current user
-  useEffect(() => {
+    useEffect(() => {
   const getUserDetail = async () => {
     try {
       const res = await axios.get('/api/me');
@@ -30,58 +31,97 @@ console.log(idFromUrl)
     }
   };
     getUserDetail();
-  }, []);
+    }, []);
 
  //getting identity
- useEffect(() => {
+   useEffect(() => {
     
   const fetchData = async () => {
     if(!username) return;
     try {
       const response = await axios.post('/api/view-identity', { username });
        if(!response){
-         console.log("identity not found")
-       }
+         console.log("identity not found") 
+        }
        else{
        setIdentityData(response.data.data)
        setIsIdentityAvailable(response.data.data.status)
-      } 
+       console.log(identityData)
+       } 
     }catch(error){
       console.log(error);
       setIsIdentityAvailable("Identity Not Found")
     }   
     }
-  fetchData();
-}, [username]); 
+    setQrValue(identityData.status)
+    fetchData();
+    
+    }, [username]); 
 
-console.log(identityData)
 
   //date making and 3d fliping of pass 
-  const dateMaker = () => {
-    let datesContainer = document.querySelectorAll('.dates');
-    datesContainer.forEach(dates => {
-      let heightForDate = dates.getBoundingClientRect().height / 12;
-      dates.innerHTML = ''; // Clear previous dates to avoid duplication
-      for (let i = 1; i <= 33; i++) {
-        let elm = document.createElement('span');
-        elm.innerHTML = `${i}`;
-        elm.classList.add('date');
-        elm.style.height = `${heightForDate}px`;
-        elm.style.width = `${heightForDate}px`;
+//date making and 3d fliping of pass 
+const GoingdateMaker = () => {
+  let datesContainer = document.querySelectorAll('#on-going-dates');
+  datesContainer.forEach(dates => {
+    let heightForDate = dates.getBoundingClientRect().height / 12;
+    dates.innerHTML = ''; // Clear previous dates to avoid duplication
+    for (let i = 1; i <= 31; i++) {
+      let elm = document.createElement('span');
+      elm.innerHTML = `${i}`;
+      elm.classList.add('date');
+      elm.style.height = `${heightForDate}px`;
+      elm.style.width = `${heightForDate}px`;
 
-        if (i <= 10) {
-          elm.classList.add('date-fill');
-        }
-
-        if (!(i > 31)) {
-          dates.appendChild(elm);
-        }
+      
+      if (identityData.monthlyPass && identityData.monthlyPass[idFromUrl] && identityData.monthlyPass[idFromUrl].selectionGoing) {
+        identityData.monthlyPass[idFromUrl].selectionGoing.forEach((element, index) => {
+          if(i===element){
+            elm.classList.add('date-fill');
+          }
+        });
+       
       }
-    });
-  };
 
-  useEffect(() => {
-    dateMaker();
+      if (!(i > 31)) {
+        dates.appendChild(elm);
+      }
+    }
+  });
+};
+GoingdateMaker();
+
+const comingdateMaker = () => {
+  let datesContainer = document.querySelectorAll('#on-coming-dates');
+  datesContainer.forEach(dates => {
+    let heightForDate = dates.getBoundingClientRect().height / 12;
+    dates.innerHTML = ''; // Clear previous dates to avoid duplication
+    for (let i = 1; i <= 31; i++) {
+      let elm = document.createElement('span');
+      elm.innerHTML = `${i}`;
+      elm.classList.add('date');
+      elm.style.height = `${heightForDate}px`;
+      elm.style.width = `${heightForDate}px`;
+
+      
+      if (identityData.monthlyPass && identityData.monthlyPass[idFromUrl] && identityData.monthlyPass[idFromUrl].selectionComing) {
+        identityData.monthlyPass[idFromUrl].selectionComing.forEach((element, index) => {
+          if(i===element){
+            elm.classList.add('date-fill');
+          }
+        });
+       
+      }
+
+      if (!(i > 31)) {
+        dates.appendChild(elm);
+      }
+    }
+  });
+};
+comingdateMaker()
+   useEffect(() => {
+    
 
     const backIcon = document.querySelector('#back-icon');
     const goIcon = document.querySelector('#go-icon');
@@ -102,7 +142,11 @@ console.log(identityData)
       backIcon.removeEventListener('click', handleBackIconClick);
       goIcon.removeEventListener('click', handleGoIconClick);
     };
-  }, []);
+   }, []);
+
+  //dynamic qr generation
+  
+  
 
   return (
     <div className="main">
@@ -169,8 +213,15 @@ console.log(identityData)
               </span>
             </div>
 
-            <div className="qr">
-               <img src="/pass-qr.jpeg" />
+            <div className="qr h-12 w-12">
+          
+            <QRCodeCanvas
+          value={String(`${identityData.IdNumber}-${idFromUrl}`)}
+          size={80} // Set the size of the QR code
+          level={"H"} // Error correction level
+          
+        />
+     
             </div>
 
             <div className="sign-container">

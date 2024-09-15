@@ -21,7 +21,15 @@ const passSchema = new mongoose.Schema({
    passFees:{
     type: Number,
     required: true
-   }
+   },
+   selectionGoing: [{ 
+    type: Number,
+    required: true, 
+   }],
+   selectionComing: [{ 
+    type: Number,
+    required: true, 
+    }]
  });
   
 

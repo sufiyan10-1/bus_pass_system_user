@@ -153,7 +153,7 @@ const Page = () => {
               {...register('distanceFrom')}
               className="w-full flex py-3 border rounded-md"
             >
-              <option value="Ardhpur">Ardhpur</option>
+              <option value="Ardhapur">Ardhapur</option>
               <option value="Hingoli">Busmat</option>
               <option value="kandhar">Kandhar</option>
             </select>
