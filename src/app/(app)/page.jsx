@@ -8,28 +8,34 @@ import { ChevronRight } from 'lucide-react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { toast } from '@/components/ui/use-toast';
+import { useLocalStorage } from 'usehooks-ts';
 
 const features = [
-  { title: "Innovative Technology", description: "Utilizing the latest technology to enhance your travel experience with real-time updates and easy booking.", icon: "/icons/technology.png" },
-  { title: "24/7 Customer Support", description: "Our dedicated team is available around the clock to assist you with any queries or concerns.", icon: "/icons/support.png" },
-  { title: "Eco-Friendly Solutions", description: "Commitment to sustainability with our eco-friendly buses and practices that reduce our carbon footprint.", icon: "/icons/eco.png" },
-  { title: "Comfortable Rides", description: "Enjoy a comfortable journey with our well-maintained buses and amenities.", icon: "/icons/comfort.png" },
+  { title: "Online Bus Pass Application", description: "Users can easily apply for bus passes by filling out forms online.", icon: "/icons/technology.png" },
+  { title: "Digital Bus Pass Generation", description: "Passes are generated in digital format with a QR code that can be scanned for verification on buses.", icon: "/icons/comfort.png" },
+  { title: "Multiple Payment Options", description: "Users can pay for bus passes via various payment methods such as UPI, net banking, etc", icon: "/icons/technology.png" },
+  { title: "Pass Usage History", description: "Users can view detailed records of their bus pass usage, including trip history.", icon: "/icons/support.png" },
+  { title: "reducing the need for physical cards.", description: "User reducing the need to carry physical cards they can show pass using mobile phone.", icon: "/icons/eco.png" },
+  
 ];
 
 const HomePage = () => {
   const router = useRouter();
   const [isUserPresent, setIsUserPresent] = useState(false);
-  const [isIdentityAvalible, setIsIdentityAvalible] = useState(false)
+  const [isIdentityAvalible, setIsIdentityAvalible] = useState('')
+  const [username, setUsername] = useState('');
 
   //getting current user
   useEffect(() => {
     const getUserDetail = async () => {
       try {
         const res = await axios.get('api/me');
-        console.log(res.data);
+        
 
         if (res.data.message === 'User found') {
           setIsUserPresent(true);
+          setUsername(res.data.data.username)
         }
       } catch (error) {
         console.log("error in page", error);
@@ -38,7 +44,32 @@ const HomePage = () => {
 
     getUserDetail();
   }, []); 
+ 
 
+  useEffect( ()=>{
+    const getIdentity = async() =>{
+      
+    try {
+      const response = await axios.post('/api/application-status', { username });
+      console.log(response)
+      if(response.data.message){
+        setIsIdentityAvalible(response.data.message)
+      }else{
+        setIsIdentityAvalible('')
+      }
+ 
+    } catch (error) {
+      console.error("Error fetching status", error);
+      toast({
+        title: "Error!",
+        description: "Failed to fetch application status.",
+        variant: 'destructive'
+      });
+    }
+  }
+ getIdentity();
+  },[username])
+    
   
 
   return (
@@ -77,7 +108,7 @@ const HomePage = () => {
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  isUserPresent ?  router.push('/studend-detial-for-identity') : router.push('sign-in');
+                  isUserPresent ? (isIdentityAvalible==='No Application Found'?router.push('/studend-detial-for-identity') :router.push('/view-identity')) : router.push('sign-in');
                 }}
                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
               >
@@ -92,7 +123,7 @@ const HomePage = () => {
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  isUserPresent && isIdentityAvalible ?  router.push('/pass-payment') : router.push('sign-in');
+                  isUserPresent ?(isIdentityAvalible==='Accepted'? router.push('/pass-payment'): router.push('/application-status') ): router.push('sign-in');
                 }}
                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
               >
