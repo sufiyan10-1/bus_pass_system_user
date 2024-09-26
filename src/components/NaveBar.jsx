@@ -5,7 +5,8 @@ import { Button } from './ui/button';
 import axios from 'axios';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from './ui/navigation-menu';
 import { toast } from './ui/use-toast';
-import { Loader, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+ 
  
 
 

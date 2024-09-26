@@ -11,13 +11,24 @@ import { useForm } from 'react-hook-form';
 import { Loader2 } from 'lucide-react';
 import axios from 'axios';
 
+
+
 function Page() {
   const router = useRouter();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { register, handleSubmit } = useForm();
+  //Toggle password function
+  const [passwordType, changePasswordType] = useState('password'); 
+  const [passwordIcon, changePasswordIcon] = useState('ri-eye-off-line')
 
+ const togglePassword = () => {
+const isPassword = passwordType == 'password';
+changePasswordType(isPassword ? 'text' : 'password');
+changePasswordIcon(isPassword ? 'ri-eye-line' : 'ri-eye-off-line');
+};
+
+  
   const onSubmit = async (data) => {
     setIsSubmitting(true);
 
@@ -63,8 +74,13 @@ function Page() {
           </Label>
           <Input type="text" {...register('identifier')} />
 
-          <Label htmlFor="password">Password</Label>
-          <Input type="password" {...register('password')} />
+          <div className='relative'>
+          <Input type={passwordType} {...register('password')} />
+          <i className={`${passwordIcon}  absolute top-1/2 right-2.5 -translate-y-1/2 text-xl cursor-pointer`} onClick={togglePassword}></i>
+          </div>
+
+
+
 
           <div className="flex items-center justify-between">
             <p>

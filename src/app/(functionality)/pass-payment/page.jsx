@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
+import passTravelingData from '@/pass-traveling-data.json'
 
 const PaymentPage = () => {
   const [loading, setLoading] = useState(false);
@@ -45,29 +46,55 @@ const PaymentPage = () => {
   }, [username]);
  
   let amount = 0;
-  if (identityData.distanceFrom === "Ardhapur" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Ardhapur") {
-    amount = 580;
-  }
-  if (identityData.distanceFrom === "Kandhar" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Kandhar") {
-    amount = 1080;
-  }
-  if (identityData.distanceFrom === "Busmat" && identityData.distanceTo === "Nanded" || identityData.distanceFrom === "Nanded" && identityData.distanceTo === "Busmat") {
-    amount = 880;
-  }
-  if (identityData.distanceFrom === "Ardhpur" && identityData.distanceTo === "Hingoli" || identityData.distanceFrom === "Hingoli" && identityData.distanceTo === "Ardhapur") {
-    amount = 1160;
-  }
-  if (identityData.distanceFrom === "Kandhar" && identityData.distanceTo === "Hingoli" || identityData.distanceFrom === "Hingoli" && identityData.distanceTo === "Kandhar") {
-    amount = 2050;
-  }
-  if (identityData.distanceFrom === "Busmat" && identityData.distanceTo === "Hingoli" && identityData.distanceFrom === "Hingoli" && identityData.distanceTo === "Busmat") {
-    amount = 1280;
-  }
+  const from = {
+    Nanded: [
+        {
+            to: 'Ardhapur',
+            price: 580
+        },
+        {
+            to: 'Chabhra',
+            price: 800
+        }
+    ],
+    Ardhapur: [
+        {
+            to: 'Nanded',
+            price: 580
+        },
+        {
+            to: 'Chabhra',
+            price: 300
+        }
+    ]
+};
 
+  function getDynamicFare(identityData1) {
+    const { distanceFrom, distanceTo } = identityData1;
+    if (passTravelingData[distanceFrom]) {
+        const destination = passTravelingData[distanceFrom].find(route => route.to === distanceTo);
+        if (destination) {
+            return destination.price;
+        }
+    }
+    if (passTravelingData[distanceTo]) {
+        const destination = passTravelingData[distanceTo].find(route => route.to === distanceFrom);  
+        if (destination) {
+            return destination.price;
+        }
+    }
 
+   
+    return "Loding...";
+}
+
+let identityData1 = {
+  distanceFrom: identityData.distanceFrom,
+  distanceTo: identityData.distanceTo
+};
+
+  amount = getDynamicFare(identityData1);
  
-
-
  
   // Create Razorpay order ID
   const createOrderId = async () => {

@@ -9,11 +9,13 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import passTravelingData from '@/pass-traveling-data.json';
 
 const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
-
+  const [distanceFromNames, setDistanceFromNames] = useState([]);
+  const [distanceToNames, setDistanceToNames] = useState([])
   const router = useRouter();
   const { toast } = useToast();
   const {
@@ -21,12 +23,15 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+ 
 
+    
   const getUserDetail = async () => {
     try {
-      const res = await axios.get('api/me');
-      console.log(res.data);
+      const res = await axios.get('api/me'); 
       setUsername(res.data.data.username);
+     
+    
     } catch (error) {
       console.log('error in page', error);
     }
@@ -34,8 +39,9 @@ const Page = () => {
 
   useEffect(() => {
     getUserDetail();
+    setDistanceFromNames(Object.keys(passTravelingData));
   }, []);
-
+  
   const onSubmit = async (data) => {
     console.log(data);
     setIsSubmitting(true);
@@ -152,18 +158,32 @@ const Page = () => {
             <select
               {...register('distanceFrom')}
               className="w-full flex py-3 border rounded-md"
+              onChange={(e)=>{e.preventDefault();
+                 e.preventDefault();
+                 const selectedValue = e.target.value; // Get the selected value
+                 const data = passTravelingData[selectedValue]; // Use selectedValue instead of value
+                 setDistanceToNames(data)
+                }}
             >
-              <option value="Ardhapur">Ardhapur</option>
-              <option value="Hingoli">Busmat</option>
-              <option value="kandhar">Kandhar</option>
+              <option>--Select To--</option>
+            {
+             distanceFromNames.map(name => (
+                <option key={name} value={name}>{name}</option>
+                ))
+            }
+
             </select>
 
             <select
               {...register('distanceTo')}
               className="w-full flex py-3 border rounded-md"
             >
-              <option value="Nanded">Nanded</option>
-              <option value="Hingoli">Hingoli</option>
+              <option value='' disabled>--Select To--</option>
+              {
+             distanceToNames.map(name => (
+                <option key={name.to} value={name.to}>{name.to}</option>
+                ))
+            }
             </select>
             {errors.distanceFrom && (
               <p className="text-red-500 text-sm">{errors.distanceFrom.message}</p>

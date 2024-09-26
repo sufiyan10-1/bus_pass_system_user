@@ -1,0 +1,97 @@
+{
+    "Nanded": [
+      { "to": "Ardhapur", "price": 580 },
+      { "to": "Chabra", "price": 800 },
+      { "to": "Lon", "price": 600 },
+      { "to": "Lahan", "price": 800 },
+      { "to": "Basmat", "price": 1200 },
+      { "to": "Waranga", "price": 1300 },
+      { "to": "Hadgao", "price": 1800 },
+      { "to": "Umarkhed", "price": 1800 },
+      { "to": "Khandar", "price": 1300 },
+      { "to": "Malegaon", "price": 760 },
+      { "to": "Savergao", "price": 1500 }
+    ],
+    "Ardhapur": [
+      { "to": "Nanded", "price": 580 },
+      { "to": "Chabra", "price": 600 },
+      { "to": "Lon", "price": 300 },
+      { "to": "Lahan", "price": 500 },
+      { "to": "Malegaon", "price": 600 },
+      { "to": "Savergao", "price": 1000 },
+      { "to": "Basmat", "price": 600 },
+      { "to": "Waranga", "price": 700 },
+      { "to": "Hadgao", "price": 1400 },
+      { "to": "Umarkhed", "price": 1500 },
+      { "to": "Khandar", "price": 1540 }
+    ],
+    "Chabra": [
+      { "to": "Nanded", "price": 800 },
+      { "to": "Ardhapur", "price": 600 },
+      { "to": "Basmat", "price": 900 },
+      { "to": "Waranga", "price": 1200 },
+      { "to": "Hadgao", "price": 1200 },
+      { "to": "Umarkhed", "price": 1300 }
+    ],
+    "Savergao": [
+      { "to": "Waranga", "price": 800 },
+      { "to": "Umarkhed", "price": 800 },
+      { "to": "Hadgao", "price": 600 },
+      { "to": "Nanded", "price": 1500 },
+      { "to": "Ardhapur", "price": 100 }
+    ],
+    "Lon": [
+      { "to": "Ardhapur", "price": 300 },
+      { "to": "Nanded", "price": 600 }
+    ],
+    "Lahan": [
+      { "to": "Ardhapur", "price": 500 },
+      { "to": "Nanded", "price": 800 }
+    ],
+    "Malegaon": [
+      { "to": "Ardhapur", "price": 600 },
+      { "to": "Nanded", "price": 760 }
+    ],
+    "Basmat": [
+      { "to": "Nanded", "price": 1200 },
+      { "to": "Ardhapur", "price": 600 },
+      { "to": "Hadgao", "price": 1550 },
+      { "to": "Waranga", "price": 1380 },
+      { "to": "Khandar", "price": 1300 },
+      { "to": "Chabra", "price": 900 }
+    ],
+    "Waranga": [
+      { "to": "Savergao", "price": 800 },
+      { "to": "Hadgao", "price": 600 },
+      { "to": "Nanded", "price": 1300 },
+      { "to": "Ardhapur", "price": 700 },
+      { "to": "Basmat", "price": 1380 },
+      { "to": "Chabra", "price": 1200 }
+    ],
+    "Hadgao": [
+      { "to": "Savergao", "price": 600 },
+      { "to": "Khandar", "price": 1200 },
+      { "to": "Waranga", "price": 600 },
+      { "to": "Umarkhed", "price": 700 },
+      { "to": "Nanded", "price": 1800 },
+      { "to": "Ardhapur", "price": 1400 },
+      { "to": "Basmat", "price": 1550 },
+      { "to": "Chabra", "price": 1200 }
+    ],
+    "Umarkhed": [
+      { "to": "Savergao", "price": 800 },
+      { "to": "Khandar", "price": 1500 },
+      { "to": "Hadgao", "price": 700 },
+      { "to": "Ardhapur", "price": 1500 },
+      { "to": "Nanded", "price": 1800 },
+      { "to": "Chabra", "price": 1300 }
+    ],
+    "Khandar": [
+      { "to": "Hadgao", "price": 1200 },
+      { "to": "Umarkhed", "price": 1500 },
+      { "to": "Nanded", "price": 1300 },
+      { "to": "Ardhapur", "price": 1540 },
+      { "to": "Basmat", "price": 1300 }
+    ]
+  }
+  
