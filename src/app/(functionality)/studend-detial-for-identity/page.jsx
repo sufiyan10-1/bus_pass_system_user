@@ -45,6 +45,7 @@ const Page = () => {
   const onSubmit = async (data) => {
     console.log(data);
     setIsSubmitting(true);
+    
     const formData = new FormData();
 
     // Append each form field to the FormData object
@@ -158,14 +159,14 @@ const Page = () => {
             <select
               {...register('distanceFrom')}
               className="w-full flex py-3 border rounded-md"
-              onChange={(e)=>{e.preventDefault();
+              onChange={(e)=>{ 
                  e.preventDefault();
                  const selectedValue = e.target.value; // Get the selected value
                  const data = passTravelingData[selectedValue]; // Use selectedValue instead of value
                  setDistanceToNames(data)
                 }}
             >
-              <option>--Select To--</option>
+              
             {
              distanceFromNames.map(name => (
                 <option key={name} value={name}>{name}</option>

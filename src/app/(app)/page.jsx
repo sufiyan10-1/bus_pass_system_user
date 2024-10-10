@@ -45,7 +45,7 @@ const HomePage = () => {
     getUserDetail();
   }, []); 
  
-
+//check identity present or not
   useEffect( ()=>{
     const getIdentity = async() =>{
       
@@ -84,7 +84,7 @@ const HomePage = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight tracking-tight transition-transform transform hover:scale-105 hover:text-gray-900">
               <span className="relative inline-block">
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-300 to-green-300 opacity-20 rounded-lg animate-pulse"></span>
-                Discover the Best of MSRTC
+                Discover the Best of bus
               </span>
             </h2>
             <p className="text-base md:text-lg lg:text-xl mb-8 opacity-90 transition-opacity duration-300 hover:opacity-100">
@@ -103,8 +103,8 @@ const HomePage = () => {
            
           <div   className="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 hover:shadow-2xl">
               <Image src="/identity-backgroud.png" alt="studend-detial-for-identity" width={100} height={100} className="mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-slate-800 mb-2">Create Identity</h3>
-              <p className="text-slate-600 mb-4">Easily create your travel identity for personalized services.</p>
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">{isIdentityAvalible=="Accepted"? "View Identity": "Create Identity"}</h3>
+              <p className="text-slate-600 mb-4">{isIdentityAvalible== "Accepted"? "Easily view your travel identity for personalized services.":"Easily create your travel identity for personalized services."}</p>
               <Button
                 onClick={(e) => {
                   e.preventDefault();
@@ -112,7 +112,7 @@ const HomePage = () => {
                 }}
                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
               >
-                Get Started
+                {isIdentityAvalible== "Accepted"? "View Identity":"Get Started"}
               </Button>
             </div>
 

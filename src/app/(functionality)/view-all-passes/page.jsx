@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 
 const PassList = () => {
-    const [identityData, setIdentityData] = useState([]);
+     
     const [isIdentityAvailable, setIsIdentityAvailable] = useState('Loading')
     const [username, setUsername] = useState('');
     const [passData, setPassData] = useState('');
@@ -39,9 +39,10 @@ const PassList = () => {
            console.log("identity not found")
          }
          else{
-         setIdentityData(response.data.data)
+        
          setPassData(response.data.data.monthlyPass)
          setIsIdentityAvailable(response.data.data.status)
+   
         } 
       }catch(error){
         console.log(error);
@@ -50,8 +51,8 @@ const PassList = () => {
       }
     fetchData();
   }, [username]); 
-  console.log(passData)
-
+ 
+console.log(passData)
   const PassBox = ({ paymentId, startDate, endDate, passFees, id}) => {
     return (
       <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
@@ -94,7 +95,7 @@ const viewPasses = ()=>{
            paymentId={pass.paymentId}
            startDate={pass.startDate}
            endDate={pass.endDate}
-           PassFees={pass.passFees}
+           passFees={pass.passFees} 
            id={index}
          />
        ))}

@@ -64,7 +64,7 @@ changePasswordIcon(isPassword ? 'ri-eye-line' : 'ri-eye-off-line');
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            MSRTC
+            Sign In
           </h1>
           <p className="mb-4">Sign In to start our services</p>
         </div>

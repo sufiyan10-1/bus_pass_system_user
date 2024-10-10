@@ -7,7 +7,7 @@ export async function POST(request) {
 
   try {
     const { username } = await request.json();
-
+  
     const identity = await IdentityModel.findOne({ username: username });
 
     if (!identity) {

@@ -50,6 +50,7 @@ const userPresentOrNot = ()=>{
             <Link href='/view-identity'><li><NavigationMenuLink>View<span className='pl-2'>Identity</span></NavigationMenuLink></li></Link>
             <Link href='/view-all-passes'><li><NavigationMenuLink>View Pass</NavigationMenuLink></li></Link>
             <Link href='/application-status'><li><NavigationMenuLink>Application <span className='pl-4'>Status</span></NavigationMenuLink></li></Link>
+            <Link href='/update-identity' className='ml-4'><li><NavigationMenuLink>Update Identity</NavigationMenuLink></li></Link>
             
             <NavigationMenuLink>
               <Button
@@ -104,7 +105,7 @@ const logOut = async ()=>{
   return (
     <div className="bg-slate-800 text-white py-4 shadow-lg fixed top-0 left-0 w-full z-50">
       <div className="relative container mx-auto flex justify-between items-center px-4">
-        <h1 className="text-2xl font-bold">MSRTC Bus Services</h1>
+        <h1 className="text-2xl font-bold">Bus Pass Services</h1>
         <nav>
           <ul className="hidden md:flex space-x-4">
             <li>

@@ -11,6 +11,7 @@ const Page = () => {
   const [username, setUsername] = useState('');
 
   // Fetching the current user if available
+  useEffect(() => {
   const getUserDetail = async () => {
     try {
       const res = await axios.get('/api/me');
@@ -26,7 +27,6 @@ const Page = () => {
     }
   };
 
-  useEffect(() => {
     getUserDetail();
   }, []);
 
@@ -37,20 +37,8 @@ const Page = () => {
     const fetchStatus = async () => {
       try {
         const response = await axios.post('/api/application-status', { username });
-        console.log(response);
         setStatus(response.data.message);
 
-        if (!response.data) {
-          toast({
-            title: "Failed!",
-            description: response.data.message,
-            variant: 'destructive'
-          });
-        } else {
-          toast({
-            description: response.data.message,
-          });
-        }
       } catch (error) {
         console.error("Error fetching status", error);
         setStatus('Error fetching status');
@@ -74,8 +62,14 @@ const Page = () => {
     } else if (status === 'Loading...') {
       return  <div className='flex justify-center'><Loader2 className='animate-spin'/></div> 
     } else {
-      return <p className="text-red-500">{status}</p>;
+      return (
+        <p
+          className="text-red-500"
+          dangerouslySetInnerHTML={{ __html: status }}
+        ></p>
+      );
     }
+    
   };
 
   return (
