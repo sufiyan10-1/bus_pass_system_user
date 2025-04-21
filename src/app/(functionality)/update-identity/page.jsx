@@ -6,7 +6,7 @@ import { Loader2, Pencil } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import passTravelingData from '@/pass-traveling-data.json';
-import { toast } from '@/components/ui/use-toast';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 
