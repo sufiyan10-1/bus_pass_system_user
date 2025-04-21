@@ -43,7 +43,7 @@ const Page = () => {
   }, []);
   
   const onSubmit = async (data) => {
-    console.log(data);
+     
     setIsSubmitting(true);
     
     const formData = new FormData();
@@ -60,12 +60,12 @@ const Page = () => {
     formData.append('distanceTo', data.distanceTo);
 
     // Append files
-    if (data.studentSign.length) formData.append('studentSign', data.studentSign[0]);
+ if (data.studentSign.length) formData.append('studentSign', data.studentSign[0]);
     if (data.studentPhoto.length) formData.append('studentPhoto', data.studentPhoto[0]);
     if (data.aadharCard.length) formData.append('aadharCard', data.aadharCard[0]);
     if (data.bonafied.length) formData.append('bonafied', data.bonafied[0]);
     if (data.feesRecipt.length) formData.append('feesRecipt', data.feesRecipt[0]);
-
+   
     console.log(formData);
     try {
       const response = await axios.post('/api/student-detial-for-identity', formData, {

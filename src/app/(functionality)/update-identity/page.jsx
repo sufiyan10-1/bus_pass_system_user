@@ -8,10 +8,13 @@ import { useForm } from 'react-hook-form';
 import passTravelingData from '@/pass-traveling-data.json';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/ui/use-toast';
+
 
 
 
 const Page = () => {
+   const { toast } = useToast();
   const [identityData, setIdentityData] = useState({});
   const [username, setUsername] = useState('');
   const [isIdentityPresent, setIsIdentityPresent] = useState('loading');
