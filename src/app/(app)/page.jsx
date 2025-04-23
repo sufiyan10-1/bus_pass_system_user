@@ -108,7 +108,7 @@ const HomePage = () => {
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  isUserPresent ? (isIdentityAvalible==='No Application Found'?router.push('/studend-detial-for-identity') :router.push('/view-identity')) : router.push('sign-in');
+                  isUserPresent ? (isIdentityAvalible==='No Application Found'?router.push('/student-detial-for-identity') :router.push('/view-identity')) : router.push('sign-in');
                 }}
                 className="bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-700"
               >
