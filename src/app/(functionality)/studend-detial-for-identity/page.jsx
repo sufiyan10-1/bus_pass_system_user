@@ -43,12 +43,10 @@ const Page = () => {
   }, []);
   
   const onSubmit = async (data) => {
-     
     setIsSubmitting(true);
-    
+  
     const formData = new FormData();
-
-    // Append each form field to the FormData object
+  
     formData.append('username', username);
     formData.append('studentName', data.studentName);
     formData.append('studentAddress', data.studentAddress);
@@ -58,22 +56,23 @@ const Page = () => {
     formData.append('studClass', data.studClass);
     formData.append('distanceFrom', data.distanceFrom);
     formData.append('distanceTo', data.distanceTo);
-
-    // Append files
- if (data.studentSign.length) formData.append('studentSign', data.studentSign[0]);
+  
+    if (data.studentSign.length) formData.append('studentSign', data.studentSign[0]);
     if (data.studentPhoto.length) formData.append('studentPhoto', data.studentPhoto[0]);
     if (data.aadharCard.length) formData.append('aadharCard', data.aadharCard[0]);
     if (data.bonafied.length) formData.append('bonafied', data.bonafied[0]);
     if (data.feesRecipt.length) formData.append('feesRecipt', data.feesRecipt[0]);
-   
-    console.log(formData);
+  
     try {
-      axios.post('/api/student-detial-for-identity', formData);
-
+      const response = await axios.post('/api/student-detial-for-identity', formData);
+  
+      console.log(response.data);
+  
       toast({
         title: 'Success!',
         description: response.data.message,
       });
+  
       router.push('/');
     } catch (error) {
       console.log('Error in sending detail of identity', error);
@@ -83,10 +82,10 @@ const Page = () => {
         variant: 'destructive',
       });
     }
-
+  
     setIsSubmitting(false);
   };
-
+  
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
       <div className="w-full max-w-lg p-8 space-y-8 bg-white rounded-lg shadow-md">
