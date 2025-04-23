@@ -68,11 +68,8 @@ const Page = () => {
    
     console.log(formData);
     try {
-      const response = await axios.post('/api/student-detial-for-identity', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      axios.post('/api/student-detial-for-identity', formData);
+
       toast({
         title: 'Success!',
         description: response.data.message,
