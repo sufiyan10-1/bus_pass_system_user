@@ -85,8 +85,9 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error while sending identity data", error);
     return new Response(
-      JSON.stringify({ success: false, message: error.message, stack: error.stack }),
+      JSON.stringify({ success: false, message: "Error while sending identity data" }),
       { status: 500 }
-    );    
+    );
+  
   }
 }

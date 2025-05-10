@@ -64,7 +64,7 @@ const Page = () => {
     if (data.feesRecipt.length) formData.append('feesRecipt', data.feesRecipt[0]);
   
     try {
-      const response = await axios.post('/api/student-detial-for-identity', formData);
+      const response = await axios.post('/app/api/student-detial-for-identity/route.js', formData);
   
       console.log(response.data);
   
