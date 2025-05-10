@@ -9,7 +9,7 @@ export async function POST(request) {
     try {
         const { identifier, password } = await request.json();
 
-        // Check if user exists
+          // Check if user exists
         const user = await UserModel.findOne({
             $or: [
               { phoneNo: isNaN(identifier) ? undefined : identifier },
